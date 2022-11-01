@@ -22,7 +22,7 @@ class ReviewListAdapter(val context: Context,
         return view
     }
 
-
+//dddddd
     override fun getItem(p0: Int): Any {
         return 0
     }
