@@ -13,16 +13,15 @@ class ReviewListAdapter(val context: Context,
                         val list_text : ArrayList<String>, val list_rating : ArrayList<String>) : BaseAdapter() {
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
 
-        val view : View = LayoutInflater.from(context).inflate(R.layout.review_item, null)
+            val view : View = LayoutInflater.from(context).inflate(R.layout.review_item, null)
 
-        view.review_nickname.text = list_nickname.get(p0)
-        view.review_content.text = list_text.get(p0)
-        view.review_rating.text = list_rating.get(p0)
+            view.review_nickname.text = list_nickname.get(p0)
+            view.review_content.text = list_text.get(p0)
+            view.review_rating.text = list_rating.get(p0)
 
-        return view
+            return view
     }
 
-//dddddd
     override fun getItem(p0: Int): Any {
         return 0
     }

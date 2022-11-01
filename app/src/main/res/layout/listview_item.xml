@@ -24,14 +24,14 @@
             android:layout_margin="10dp"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:text="제목 영역입니다."/>
+            android:text="식당이름 영역입니다."/>
 
         <TextView
             android:id="@+id/lv_textview_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="최근 리뷰가 N개 입니다."/>
+            android:text="추천 메뉴"/>
 
         <TextView
             android:id="@+id/lv_textview_3"
@@ -40,7 +40,7 @@
             android:layout_marginLeft="10dp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
-            android:text="분류입니다."/>
+            android:text="주소입니다."/>
 
 
     </LinearLayout>
