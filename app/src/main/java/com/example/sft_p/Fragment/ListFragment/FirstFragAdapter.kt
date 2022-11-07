@@ -16,9 +16,9 @@ class FirstFragAdapter(val context: Context, val title : ArrayList<String>, val 
 
         val view : View = LayoutInflater.from(context).inflate(R.layout.listview_item, null)
 
-        view.lv_textview_1.text = title.get(0)
-        view.lv_textview_2.text = menu.get(0)
-        view.lv_textview_3.text = locate.get(0)
+//        view.lv_textview_1.text = title.get(0)
+//        view.lv_textview_2.text = menu.get(0)
+//        view.lv_textview_3.text = locate.get(0)
 
 
         return view
