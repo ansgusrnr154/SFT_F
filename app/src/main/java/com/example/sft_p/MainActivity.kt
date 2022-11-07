@@ -100,8 +100,9 @@ class MainActivity : AppCompatActivity() {
         }
         register_icon.setOnClickListener{
 
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            if(ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                startActivity(Intent(this,RegisterActivity::class.java))
+            }
         }
 
 

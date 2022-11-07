@@ -37,7 +37,7 @@ class FirstFragment : Fragment() {
         var contentUidList : ArrayList<String> = arrayListOf()
         init {
 
-            firestore?.collection("images")?.orderBy("timestamp")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+            firestore?.collection("한식")?.orderBy("timestamp")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 contentDTOs.clear()
                 contentUidList.clear()
                 //Sometimes, This code return null of querySnapshot when it signout
@@ -83,6 +83,7 @@ class FirstFragment : Fragment() {
         }
 
     }
+
 }
 
 //        view.listview_first_fragment.setOnItemClickListener { adapterView, view, i, l ->
