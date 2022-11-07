@@ -1,12 +1,30 @@
 package com.example.sft_p.Zzim
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import com.example.sft_p.Fragment.ListFragment.ContentDTO
 import com.example.sft_p.R
 import com.example.sft_p.Utils.FirebaseUtils
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_zzim.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ZzimActivity : AppCompatActivity() {
+    var PICK_IMAGE_FROM_ALBUM = 0
+    var storage : FirebaseStorage? = null
+    var photoUri : Uri? = null
+    var auth : FirebaseAuth? = null
+    var firestore : FirebaseFirestore? = null
 
     val array_list = ArrayList<String>()
 
@@ -14,55 +32,69 @@ class ZzimActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_zzim)
 
+        //Initiate
+        storage = FirebaseStorage.getInstance()
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
-        FirebaseUtils.db
-            .collection("zzim")
-            .document(FirebaseUtils.getUid())
-            .get()
-            .addOnSuccessListener {documentSnapshot ->
+        //Open the album
+        var photoPickerIntent = Intent(Intent.ACTION_PICK)
+        photoPickerIntent.type = "image/*"
+        startActivityForResult(photoPickerIntent,PICK_IMAGE_FROM_ALBUM)
 
-                if(documentSnapshot.get("Lang1") != ""){
-                    array_list.add("Lang1")
-                }
+        //add image upload event
+        addphoto_btn_upload.setOnClickListener {
+            contentUpload()
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == PICK_IMAGE_FROM_ALBUM){
+            if(resultCode == Activity.RESULT_OK){
+                //This is path to the selected image
+                photoUri = data?.data
+                addphoto_image.setImageURI(photoUri)
 
-                if(documentSnapshot.get("Lang2") != ""){
-                    array_list.add("Lang2")
-                }
-
-                if(documentSnapshot.get("Lang3") != ""){
-                    array_list.add("Lang3")
-                }
-
-                if(documentSnapshot.get("Lang4") != ""){
-                    array_list.add("Lang4")
-                }
-
-                if(documentSnapshot.get("Lang5") != ""){
-                    array_list.add("Lang5")
-                }
-
-                if(documentSnapshot.get("Lang6") != ""){
-                    array_list.add("Lang6")
-                }
-
-                if(documentSnapshot.get("Lang7") != ""){
-                    array_list.add("Lang7")
-                }
-
-                if(documentSnapshot.get("Lang8") != ""){
-                    array_list.add("Lang8")
-                }
-
-                if(documentSnapshot.get("Lang9") != ""){
-                    array_list.add("Lang9")
-                }
-
-                val zzimAdapter = ZzimAdapter(this, array_list)
-                zzim_listview.adapter = zzimAdapter
-
-
+            }else{
+                //Exit the addPhotoActivity if you leave the album without selecting it
+                finish()
 
             }
-            .addOnFailureListener {  }
+        }
+    }
+    fun contentUpload(){
+        //Make filename
+        var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        var imageFileName = "IMAGE_" + timestamp + "_.png"
+
+        var storageRef = storage?.reference?.child("images")?.child(imageFileName)
+
+        //FileUpload
+        storageRef?.putFile(photoUri!!)?.continueWithTask {task: Task<UploadTask.TaskSnapshot> ->
+            return@continueWithTask storageRef.downloadUrl
+        }?.addOnSuccessListener { uri ->
+            var contentDTO = ContentDTO()
+
+            //Insert downloadUrl of image
+            contentDTO.imageUrl = uri.toString()
+
+            //Insert uid of user
+            contentDTO.uid = auth?.currentUser?.uid
+
+            //Insert userId
+            contentDTO.userId = auth?.currentUser?.email
+
+            //Insert explain of content
+            contentDTO.explain = addphoto_edit_explain.text.toString()
+
+            //Insert timestamp
+            contentDTO.timestamp = System.currentTimeMillis()
+
+            firestore?.collection("images")?.document()?.set(contentDTO)
+
+            setResult(Activity.RESULT_OK)
+
+            finish()
+        }
     }
 }

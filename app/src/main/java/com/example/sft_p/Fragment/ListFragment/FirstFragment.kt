@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide.init
 import com.example.sft_p.Fragment.MarketInfo.MarketInfoActivity
 import com.example.sft_p.R
 import com.example.sft_p.Utils.FirebaseUtils
@@ -15,44 +17,33 @@ import kotlinx.android.synthetic.main.fragment_first.view.*
 
 class FirstFragment : Fragment() {
 
-    private val db = FirebaseFirestore.getInstance()
-
-    private val title_array = ArrayList<String>()
-    private val menu_array = ArrayList<String>()
-    private val locate_array = ArrayList<String>()
-
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+       var view = LayoutInflater.from(activity).inflate(R.layout.fragment_first,container,false)
+        return view
+    }
+    inner class DetailViewRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+        init {
 
-        val  view : View = inflater.inflate(R.layout.fragment_first, container, false)
+        }
 
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            TODO("Not yet implemented")
+        }
 
-        //adapter연결
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            TODO("Not yet implemented")
+        }
 
-        val first_adapter = FirstFragAdapter(requireContext(), title_array, menu_array, locate_array)
-        view.listview_first_fragment.adapter = first_adapter
+        override fun getItemCount(): Int {
+            TODO("Not yet implemented")
+        }
 
-        //db연결
-
-        db.collection("한식")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    title_array.add(document.get("title") as String)
-                    menu_array.add(document.get("menu") as String)
-                    locate_array.add(document.get("locate") as String)
-                }
-                first_adapter.notifyDataSetChanged()
-            }
-            .addOnFailureListener { exception ->
-
-            }
-
-
-
+    }
+}
 
 
 
@@ -65,7 +56,3 @@ class FirstFragment : Fragment() {
 //            intent.putExtra("title", title_array.get(i).title)
 //            startActivity(intent)
 //        }
-
-        return view
-    }
-}
