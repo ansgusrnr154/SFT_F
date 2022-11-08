@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
 import android.widget.Toast
+import com.example.sft_p.Fragment.ListFragment.ContentDTO
 import com.example.sft_p.R
 import com.example.sft_p.Utils.FirebaseUtils
 import com.google.firebase.auth.FirebaseAuth
@@ -17,7 +18,11 @@ class MarketInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_market_info)
 
-        lecture_text.text = intent.getStringExtra("title")
+//        lecture_text.text = intent.getStringExtra("title")
+
+//        lecture_text.text = data!!.title
+
+
 
         //찜여부 확인
 

@@ -91,10 +91,10 @@ class RegisterActivity : AppCompatActivity() {
                 contentDTO.title = editText1.text.toString()
 
                 //추천 메뉴
-                contentDTO.title = editText2.text.toString()
+                contentDTO.menu = editText2.text.toString()
 
                 //식당 위치
-                contentDTO.title = editText3.text.toString()
+                contentDTO.locate = editText3.text.toString()
 
                 firestore?.collection(selected)?.document()?.set(contentDTO)
 
