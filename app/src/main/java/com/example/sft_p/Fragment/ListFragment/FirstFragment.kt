@@ -85,9 +85,23 @@ class FirstFragment : Fragment() {
             //ProfileImage
             Glide.with(p0.itemView.context).load(contentDTOs!![p1].imageUrl).into(viewholder.detailviewitem_profile_image)
 
-            //This code is when the button is clicked
+            //title
+            viewholder. title_view.text = contentDTOs!![p1].title
+
+            //locate
+            viewholder. locate_view.text = contentDTOs!![p1].locate
+
+            //This code is when the button is clicked$lambda-2
             viewholder.detailviewitem_favorite_imageview.setOnClickListener {
                 favoriteEvent(p1)
+            }
+
+            viewholder.detailviewitem_comment_imageview.setOnClickListener { v ->
+                var intent = Intent(v.context,CommentActivity::class.java)
+                intent.putExtra("contentUid",contentUidList[p1])
+                intent.putExtra("destinationUid",contentDTOs[p1].uid)
+                intent.putExtra("rstValue","한식")
+                startActivity(intent)
             }
 
             //This code is when the page is loaded
@@ -96,6 +110,8 @@ class FirstFragment : Fragment() {
             }else{
                 viewholder.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_favorite_border)
             }
+
+
 
         }
         override fun getItemCount(): Int {
