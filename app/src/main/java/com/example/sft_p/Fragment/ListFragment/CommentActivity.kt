@@ -1,25 +1,35 @@
 package com.example.sft_p.Fragment.ListFragment
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.sft_p.Fragment.Auth.LoginActivity
+import com.example.sft_p.Fragment.Auth.MypageActivity
+import com.example.sft_p.Fragment.Auth.RegisterActivity
+import com.example.sft_p.MainActivity
 import com.example.sft_p.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.activity_mypage.*
+import kotlinx.android.synthetic.main.bottom.*
 import kotlinx.android.synthetic.main.item_comment.view.*
 
 class CommentActivity : AppCompatActivity() {
     var contentUid : String? = null
     var rstValue : String? = null
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment)
@@ -41,6 +51,13 @@ class CommentActivity : AppCompatActivity() {
 
             comment_edit_message.setText("")
         }
+
+        icon.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
     inner class CommentRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -62,6 +79,8 @@ class CommentActivity : AppCompatActivity() {
                     notifyDataSetChanged()
                 }
         }
+
+
 
         override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder {
             var view = LayoutInflater.from(p0.context).inflate(R.layout.item_comment, p0, false)
@@ -88,6 +107,9 @@ class CommentActivity : AppCompatActivity() {
                     }
                 }
         }
+
+
+
 
         override fun getItemCount(): Int {
             return comments.size

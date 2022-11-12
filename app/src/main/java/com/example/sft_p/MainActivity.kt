@@ -14,9 +14,7 @@ import com.example.sft_p.Fragment.Auth.RegisterActivity
 import com.example.sft_p.Zzim.ZzimActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.gridview
-import kotlinx.android.synthetic.main.bottom.my_page
-import kotlinx.android.synthetic.main.bottom.register_icon
-import kotlinx.android.synthetic.main.bottom.zzim_icon
+import kotlinx.android.synthetic.main.bottom.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -71,6 +69,13 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = ViewPagerAdapter(this)
         viewpager.adapter = adapter
+
+
+        home.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
         zzim_icon.setOnClickListener {

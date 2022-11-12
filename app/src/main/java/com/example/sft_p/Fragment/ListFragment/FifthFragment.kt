@@ -1,25 +1,24 @@
 package com.example.sft_p.Fragment.ListFragment
 
 import android.content.Intent
-import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.Glide.init
-import com.example.sft_p.Fragment.MarketInfo.MarketInfoActivity
 import com.example.sft_p.R
-import com.example.sft_p.Utils.FirebaseUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_first.view.*
 import kotlinx.android.synthetic.main.listview_item.view.*
 
-class FirstFragment : Fragment() {
+/**
+ * A simple [Fragment] subclass.
+ */
+class FifthFragment : Fragment() {
     var firestore : FirebaseFirestore? = null
     var uid : String? = null
 
@@ -28,7 +27,7 @@ class FirstFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       var view = LayoutInflater.from(activity).inflate(R.layout.fragment_first,container,false)
+        var view = LayoutInflater.from(activity).inflate(R.layout.fragment_first,container,false)
         firestore = FirebaseFirestore.getInstance()
         uid = FirebaseAuth.getInstance().currentUser?.uid
 
@@ -44,7 +43,7 @@ class FirstFragment : Fragment() {
 
         init {
 
-            firestore?.collection("한식")?.orderBy("timestamp")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+            firestore?.collection("치킨")?.orderBy("timestamp")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 contentDTOs.clear()
                 contentUidList.clear()
                 //Sometimes, This code return null of querySnapshot when it signout
@@ -62,7 +61,7 @@ class FirstFragment : Fragment() {
 
 
         override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder {
-           var view = LayoutInflater.from(p0.context).inflate(R.layout.listview_item,p0,false)
+            var view = LayoutInflater.from(p0.context).inflate(R.layout.listview_item,p0,false)
             return CustomViewHolder(view)
         }
 
@@ -100,7 +99,7 @@ class FirstFragment : Fragment() {
                 var intent = Intent(v.context,CommentActivity::class.java)
                 intent.putExtra("contentUid",contentUidList[p1])
                 intent.putExtra("destinationUid",contentDTOs[p1].uid)
-                intent.putExtra("rstValue","한식")
+                intent.putExtra("rstValue","치킨")
                 startActivity(intent)
             }
 
@@ -118,7 +117,7 @@ class FirstFragment : Fragment() {
             return contentDTOs.size
         }
         fun favoriteEvent(position : Int){
-            var tsDoc = firestore?.collection("한식")?.document(contentUidList[position])
+            var tsDoc = firestore?.collection("치킨")?.document(contentUidList[position])
             firestore?.runTransaction{ transaciton ->
 
                 var contentDTO = transaciton.get(tsDoc!!).toObject(ContentDTO::class.java)
@@ -133,6 +132,5 @@ class FirstFragment : Fragment() {
             }
 
         }
-
     }
 }

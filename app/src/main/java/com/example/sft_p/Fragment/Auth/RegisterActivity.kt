@@ -190,6 +190,8 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+
+
 //    fun contentUpload(){
 //
 //        //Make filename

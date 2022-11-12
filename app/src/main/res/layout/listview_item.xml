@@ -6,14 +6,13 @@
 
 
 
-
     <LinearLayout
         android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
             android:id="@+id/detailviewitem_profile_image"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/store"
             android:layout_margin="7.5dp"
             android:layout_width="35dp"
             android:layout_height="35dp"/>
@@ -111,6 +110,7 @@
 
 
 <!--    </LinearLayout>-->
+
 
 
 
