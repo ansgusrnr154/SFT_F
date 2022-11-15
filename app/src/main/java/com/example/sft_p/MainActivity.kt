@@ -32,13 +32,13 @@ class MainActivity : AppCompatActivity() {
 
 
         val img = arrayOf(
-            R.drawable.korean,
+            R.drawable.korea,
             R.drawable.china,
             R.drawable.japan,
-            R.drawable.dessert,
+            R.drawable.desert,
             R.drawable.yankee,
-            R.drawable.fried,
-            R.drawable.bun,
+            R.drawable.chicken,
+            R.drawable.bunsik,
             R.drawable.pizza
 
         )
