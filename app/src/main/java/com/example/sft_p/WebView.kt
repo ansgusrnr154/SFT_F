@@ -17,7 +17,7 @@ class WebView : AppCompatActivity() {
             webViewClient = WebViewClient()
             webChromeClient = WebChromeClient()
         }
-        webView.loadUrl("https://www.naver.co.kr/")
+        webView.loadUrl("https://www.naver.com/")
     }
 
     override fun onBackPressed() {
