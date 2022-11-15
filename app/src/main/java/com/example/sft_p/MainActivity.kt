@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        zzim_icon.setOnClickListener {
+        search_icon.setOnClickListener {
 
             if(ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
                 startActivity(Intent(this,ZzimActivity::class.java))
