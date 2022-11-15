@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
 
         search_icon.setOnClickListener {
 
-            val intent = Intent(baseContext,WebView::class.java)
+            val intent = Intent(this, WebView::class.java)
             startActivity(intent)
         }
 
