@@ -13,12 +13,20 @@ class WebView : AppCompatActivity() {
         setContentView(R.layout.searchview)
 
         val webView = findViewById<android.webkit.WebView>(R.id.webview)
+        webView.settings.apply {
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            setSupportMultipleWindows(true)
+        }
         webView.apply {
             webViewClient = WebViewClient()
             webChromeClient = WebChromeClient()
         }
-        webView.loadUrl("https://www.naver.co.kr/")
+        webView.loadUrl("https://www.naver.com/")
     }
+
+
+
 
     override fun onBackPressed() {
         val webView = findViewById<android.webkit.WebView>(R.id.webview)
