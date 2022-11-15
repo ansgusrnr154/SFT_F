@@ -80,10 +80,8 @@ class MainActivity : AppCompatActivity() {
 
         search_icon.setOnClickListener {
 
-            if(ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-                startActivity(Intent(this,ZzimActivity::class.java))
-            }
-
+            val intent = Intent(baseContext,WebView::class.java)
+            startActivity(intent)
         }
 
         my_page.setOnClickListener {
