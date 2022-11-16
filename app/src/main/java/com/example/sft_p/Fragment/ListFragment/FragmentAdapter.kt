@@ -29,6 +29,7 @@ class FragmentAdapter(fm : FragmentManager) : FragmentPagerAdapter(fm) {
                 return SeventhFragment()
             }
         }
+
     }
 
     override fun getCount(): Int {

@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         gridview.setOnItemClickListener { adapterView, view, i, l ->
 
             val intent = Intent(this, LectureActivity::class.java)
+            intent.putExtra("p0",i)
             startActivity(intent)
 
         }
@@ -82,6 +83,9 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, WebView::class.java)
             startActivity(intent)
+//            if(ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+//                startActivity(Intent(this,WebView::class.java))
+//            }
         }
 
         my_page.setOnClickListener {
